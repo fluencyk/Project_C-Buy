@@ -20,13 +20,35 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --color",
+    "prettier": "prettier --check",
+    "prettier-fix": "prettier --write",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --color"
+    ],
+    "*.{js,jsx,json,css}": [
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.7.1",
+    "husky": "^7.0.0"
+  },
+  "engines": {
+    "node": "^16.13.0"
   },
   "browserslist": {
     "production": [
