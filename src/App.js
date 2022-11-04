@@ -1,13 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "./pages/login/Login";
-import { SignUp } from "./pages/signup/Signup";
-import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/Dashboard";
-import { Signout } from "./pages/Signout";
-import { RequireAuth } from "./components/RequireAuth";
-import { wrapWithHeader } from "./hocs/wrapWithHeader";
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/login/Login';
+import { SignUp } from './pages/signup/Signup';
+import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
+import { Signout } from './pages/Signout';
+import { RequireAuth } from './components/RequireAuth';
+import { wrapWithHeader } from './hocs/wrapWithHeader';
 
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
