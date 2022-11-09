@@ -1,17 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, Card } from "react-bootstrap";
-import { Errors } from "../../components/Error";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  FormGroup,
+  ButtonGroup,
+  Button,
+  Card,
+  InputGroup,
+} from '@blueprintjs/core';
+import { Errors } from '../../components/Error';
 
 export function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   function validateForm() {
     const err = {};
     if (password !== confirmPassword) {
-      err["Password"] = "Password and Confirm are not equal.";
+      err['Password'] = 'Password and Confirm are not equal.';
     }
     return err;
   }
@@ -22,55 +28,50 @@ export function SignUp() {
 
   return (
     <Card className="Login">
-      <Card.Title style={{ textAlign: "center" }}>Sign up</Card.Title>
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>Email</Form.Label>
+      <h2>Sign up</h2>
+      <form onSubmit={handleSubmit}>
+        <FormGroup label="Email">
+          <InputGroup
+            autoFocus
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormGroup>
 
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+        <FormGroup label="Password">
+          <InputGroup
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            onBlur={validateForm}
+          />
+        </FormGroup>
 
-          <Form.Group size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
+        <FormGroup label="Confirm Password">
+          <InputGroup
+            type="password"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            onBlur={validateForm}
+          />
+        </FormGroup>
 
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={validateForm}
-            />
-          </Form.Group>
-
-          <Form.Group size="lg">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              onBlur={validateForm}
-            />
-          </Form.Group>
-
+        <ButtonGroup large fill vertical>
           <Button
-            style={{ margin: "10px 0" }}
-            size="med"
+            intent="primary"
+            fill
+            large
+            text="Sign up"
             type="submit"
-            // disabled={!validateForm()}
-          >
-            Sign up
+            disabled={!validateForm()}
+          />
+          <Button large fill>
+            <Link to="/login">Login</Link>
           </Button>
-        </Form>
-      </Card.Body>
-      <Errors error={validateForm()} />
-      <div>
-        <Link to="/login">Login</Link>
-      </div>
+        </ButtonGroup>
+      </form>
+      <Errors errors={validateForm()} />
     </Card>
   );
 }

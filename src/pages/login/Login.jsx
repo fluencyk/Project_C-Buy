@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
+import React, { useState } from 'react';
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  FormGroup,
+  InputGroup,
+} from '@blueprintjs/core';
+import { Link, useNavigate } from 'react-router-dom';
+import './login.css';
 
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from '../../context/AuthContext';
 
 export default function Login() {
   const navigate = useNavigate();
   const { signin } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -17,47 +23,44 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    signin({ email }, () => navigate("/"));
+    signin({ email }, () => navigate('/'));
   }
 
   return (
-    <Card className="Login">
-      <Card.Title style={{ textAlign: "center" }}>Login</Card.Title>
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+    <Card className="Login" elevation={2}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <FormGroup label="Email">
+          <InputGroup
+            large
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormGroup>
 
-          <Form.Group size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
-
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-
+        <FormGroup labelFor="pass" label="Password">
+          <InputGroup
+            id="pass"
+            type="password"
+            value={password}
+            large
+            onChange={e => setPassword(e.target.value)}
+          />
+        </FormGroup>
+        <ButtonGroup large fill vertical>
           <Button
-            style={{ margin: "10px 0" }}
-            size="med"
+            text="Login"
+            intent="primary"
             type="submit"
             disabled={!validateForm()}
-          >
-            Login
+          />
+
+          <Button>
+            <Link to="/signup">Sign up</Link>
           </Button>
-        </Form>
-      </Card.Body>
-      <div>
-        <Link to="/signup">Sign up</Link>
-      </div>
+        </ButtonGroup>
+      </form>
     </Card>
   );
 }
