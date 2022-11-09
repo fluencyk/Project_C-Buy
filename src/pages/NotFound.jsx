@@ -1,8 +1,9 @@
+import { Callout } from '@blueprintjs/core';
+
 export default function ErrorPage() {
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-    </div>
+    <Callout title="Oops" intent="warning">
+      <p>Sorry, The page you're looking for doesn't exist</p>
+    </Callout>
   );
 }
