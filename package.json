@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --color",
     "prettier": "prettier --check",
-    "prettier-fix": "prettier --write",
+    "prettier-fix": "prettier --write src",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },

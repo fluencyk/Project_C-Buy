@@ -50,13 +50,14 @@ export default function Login() {
         </FormGroup>
         <ButtonGroup large fill vertical>
           <Button
+            rightIcon="arrow-right"
             text="Login"
             intent="primary"
             type="submit"
             disabled={!validateForm()}
           />
 
-          <Button>
+          <Button rightIcon="people">
             <Link to="/signup">Sign up</Link>
           </Button>
         </ButtonGroup>

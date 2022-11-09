@@ -60,13 +60,11 @@ export function SignUp() {
         <ButtonGroup large fill vertical>
           <Button
             intent="primary"
-            fill
-            large
             text="Sign up"
             type="submit"
             disabled={!validateForm()}
           />
-          <Button large fill>
+          <Button icon="arrow-left">
             <Link to="/login">Login</Link>
           </Button>
         </ButtonGroup>
