@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from '@blueprintjs/core';
+import { Button, Card } from '@blueprintjs/core';
 
 function Dashboard() {
   const [items, setItems] = useState([]);
@@ -25,16 +25,26 @@ function Dashboard() {
       {items.length &&
         items.map(item => {
           return (
-            <Card key={item.url} interactive>
+            <Card
+              style={{ textAlign: 'center', borderRadius: 20 }}
+              key={item.url}
+              interactive
+            >
               <img
                 loading="lazy"
-                onError={'asd'}
                 width="100%"
                 style={{ objectFit: 'contain' }}
                 alt={item.title}
                 src={item.url}
               />
-              {item.title}
+              <h5>{item.title}</h5>
+              <Button
+                intent="primary"
+                fill
+                minimal
+                rightIcon="shopping-cart"
+                text="Add to Cart"
+              />
             </Card>
           );
         })}
