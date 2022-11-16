@@ -14,14 +14,29 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route exact path="/login" element={wrapWithHeader(Login)} />
-        <Route exact path="/signout" element={wrapWithHeader(Signout)} />
+        <Route
+          exact
+          path="/signout"
+          element={
+            <RequireAuth>
+              <Signout />
+            </RequireAuth>
+          }
+        />
         <Route exact path="/signup" element={wrapWithHeader(SignUp)} />
         <Route
           exact
           path="/"
           element={<RequireAuth>{wrapWithHeader(Dashboard)}</RequireAuth>}
         />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            <RequireAuth>
+              <NotFound />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </AuthProvider>
   );
