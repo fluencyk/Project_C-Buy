@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card } from '@blueprintjs/core';
+import { Button, Card, NonIdealState } from '@blueprintjs/core';
+
+import { useCart } from '../context/CartContext';
 
 function Dashboard() {
   const [items, setItems] = useState([]);
+  const { addItemToCart, cartItems } = useCart();
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos')
@@ -13,6 +16,10 @@ function Dashboard() {
       });
   }, []);
 
+  const handleAddCartItem = item => {
+    addItemToCart(item);
+  };
+
   return (
     <div
       style={{
@@ -22,18 +29,20 @@ function Dashboard() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
       }}
     >
-      {items.length &&
+      {items.length ? (
         items.map(item => {
+          const alreadyInCart = cartItems.find(_item => _item.url === item.url);
           return (
             <Card
               style={{ textAlign: 'center', borderRadius: 20 }}
               key={item.url}
+              onClick={() => handleAddCartItem(item)}
               interactive
             >
               <img
                 loading="lazy"
                 width="100%"
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: 'contain', borderRadius: 20 }}
                 alt={item.title}
                 src={item.url}
               />
@@ -42,12 +51,20 @@ function Dashboard() {
                 intent="primary"
                 fill
                 minimal
-                rightIcon="shopping-cart"
-                text="Add to Cart"
+                rightIcon={alreadyInCart ? 'tick' : 'shopping-cart'}
+                onClick={() => handleAddCartItem(item)}
+                text={alreadyInCart ? 'Added to Cart' : 'Add to Cart'}
               />
             </Card>
           );
-        })}
+        })
+      ) : (
+        <NonIdealState
+          title="No Items found"
+          icon="search"
+          action={<Button text="Try Again" icon="refresh" />}
+        />
+      )}
     </div>
   );
 }

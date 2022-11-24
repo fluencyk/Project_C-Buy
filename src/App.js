@@ -8,36 +8,39 @@ import { RequireAuth } from './components/RequireAuth';
 import { wrapWithHeader } from './hocs/wrapWithHeader';
 
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route exact path="/login" element={wrapWithHeader(Login)} />
-        <Route
-          exact
-          path="/signout"
-          element={
-            <RequireAuth>
-              <Signout />
-            </RequireAuth>
-          }
-        />
-        <Route exact path="/signup" element={wrapWithHeader(SignUp)} />
-        <Route
-          exact
-          path="/"
-          element={<RequireAuth>{wrapWithHeader(Dashboard)}</RequireAuth>}
-        />
-        <Route
-          path="*"
-          element={
-            <RequireAuth>
-              <NotFound />
-            </RequireAuth>
-          }
-        />
-      </Routes>
+      <CartProvider>
+        <Routes>
+          <Route exact path="/login" element={wrapWithHeader(Login)} />
+          <Route
+            exact
+            path="/signout"
+            element={
+              <RequireAuth>
+                <Signout />
+              </RequireAuth>
+            }
+          />
+          <Route exact path="/signup" element={wrapWithHeader(SignUp)} />
+          <Route
+            exact
+            path="/"
+            element={<RequireAuth>{wrapWithHeader(Dashboard)}</RequireAuth>}
+          />
+          <Route
+            path="*"
+            element={
+              <RequireAuth>
+                <NotFound />
+              </RequireAuth>
+            }
+          />
+        </Routes>
+      </CartProvider>
     </AuthProvider>
   );
 }
