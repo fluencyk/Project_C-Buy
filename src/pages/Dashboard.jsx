@@ -6,13 +6,15 @@ import { useCart } from '../context/CartContext';
 function Dashboard() {
   const [items, setItems] = useState([]);
   const { addItemToCart, cartItems } = useCart();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos')
       .then(response => response.json())
       .then(json => {
-        const asd = json.slice(0, 20);
-        setItems(asd);
+        const data = json.slice(0, 20);
+        setItems(data);
+        setLoading(false);
       });
   }, []);
 
@@ -62,7 +64,7 @@ function Dashboard() {
         <NonIdealState
           title="No Items found"
           icon="search"
-          action={<Button text="Try Again" icon="refresh" />}
+          action={<Button loading={loading} text="Try Again" icon="refresh" />}
         />
       )}
     </div>

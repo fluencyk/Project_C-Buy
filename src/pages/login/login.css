@@ -1,10 +1,5 @@
 .Login {
   width: 20rem;
-  margin: 2em auto;
-  padding: 1em;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(255, 255, 255),
-    rgb(168, 172, 185)
-  );
+  margin: 0 auto;
+  border-radius: 20px;
 }
