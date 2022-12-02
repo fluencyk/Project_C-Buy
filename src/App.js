@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from './pages/login/Login';
+import { Login } from './pages/login/Login';
 import { SignUp } from './pages/signup/Signup';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashboard';
 import { Signout } from './pages/Signout';
+import { Checkout } from './pages/Checkout';
 import { RequireAuth } from './components/RequireAuth';
 import { wrapWithHeader } from './hocs/wrapWithHeader';
 
@@ -30,6 +31,11 @@ function App() {
             exact
             path="/"
             element={<RequireAuth>{wrapWithHeader(Dashboard)}</RequireAuth>}
+          />
+          <Route
+            exact
+            path="/checkout"
+            element={<RequireAuth>{wrapWithHeader(Checkout)}</RequireAuth>}
           />
           <Route
             path="*"

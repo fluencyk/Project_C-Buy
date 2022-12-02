@@ -10,7 +10,10 @@ export function CartProvider({ children }) {
   const [cartItems, setCartItems] = React.useState([]);
 
   const addItemToCart = item => {
-    setCartItems(items => items.concat(item));
+    setCartItems(items => {
+      const ids = items.map(v => v.url);
+      return ids.includes(item.url) ? items : items.concat(item);
+    });
   };
 
   const removeItemFromCart = item => {

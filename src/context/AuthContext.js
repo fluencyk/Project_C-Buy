@@ -1,32 +1,34 @@
-import React from "react";
-import { fakeAuthProvider } from "../authProvider";
+import React from 'react';
+import { fakeAuthProvider } from '../authProvider';
 
-let AuthContext = React.createContext(null);
+const AuthContext = React.createContext(null);
 
 export function useAuth() {
   return React.useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
-  let [user, setUser] = React.useState(() =>
-    JSON.parse(localStorage.getItem("user"))
+  const [user, setUser] = React.useState(() =>
+    JSON.parse(localStorage.getItem('user')),
   );
 
-  let signin = (newUser, callback) => {
+  const signin = async (newUser, callback) => {
     return fakeAuthProvider.signin(() => {
       setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
       callback();
     });
   };
 
-  let signout = (callback) => {
+  const signout = async callback => {
     return fakeAuthProvider.signout(() => {
       setUser(null);
+      localStorage.clear();
       callback();
     });
   };
 
-  let value = { user, signin, signout };
+  const value = { user, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

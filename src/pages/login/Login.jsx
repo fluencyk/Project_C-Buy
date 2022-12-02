@@ -8,10 +8,11 @@ import {
 } from '@blueprintjs/core';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
+import loginImg from '../../res/login.jpg';
 
 import { useAuth } from '../../context/AuthContext';
 
-export default function Login() {
+export function Login() {
   const navigate = useNavigate();
   const { signin } = useAuth();
   const [email, setEmail] = useState('');
@@ -23,45 +24,54 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    signin({ email }, () => navigate('/'));
+    signin({ email }, () => navigate('/', { replace: true }));
   }
 
   return (
-    <Card className="Login" elevation={2}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <FormGroup label="Email">
-          <InputGroup
-            large
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </FormGroup>
+    <div
+      style={{
+        backgroundImage: 'url(' + loginImg + ')',
+        backgroundSize: 'cover',
+        height: '100vh',
+        padding: '20vh 0',
+      }}
+    >
+      <Card className="Login" elevation={5}>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <FormGroup label="Email">
+            <InputGroup
+              large
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </FormGroup>
 
-        <FormGroup labelFor="pass" label="Password">
-          <InputGroup
-            id="pass"
-            type="password"
-            value={password}
-            large
-            onChange={e => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <ButtonGroup large fill vertical>
-          <Button
-            rightIcon="arrow-right"
-            text="Login"
-            intent="primary"
-            type="submit"
-            disabled={!validateForm()}
-          />
+          <FormGroup labelFor="pass" label="Password">
+            <InputGroup
+              id="pass"
+              type="password"
+              value={password}
+              large
+              onChange={e => setPassword(e.target.value)}
+            />
+          </FormGroup>
+          <ButtonGroup large fill vertical>
+            <Button
+              rightIcon="arrow-right"
+              text="Login"
+              intent="primary"
+              type="submit"
+              disabled={!validateForm()}
+            />
 
-          <Button rightIcon="people">
-            <Link to="/signup">Sign up</Link>
-          </Button>
-        </ButtonGroup>
-      </form>
-    </Card>
+            <Button rightIcon="people">
+              <Link to="/signup">Sign up</Link>
+            </Button>
+          </ButtonGroup>
+        </form>
+      </Card>
+    </div>
   );
 }

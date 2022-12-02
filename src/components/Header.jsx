@@ -102,6 +102,7 @@ export function Header() {
                   elementRef={ref}
                   minimal
                   icon="shopping-cart"
+                  rightIcon="chevron-down"
                 />
               )}
             />
