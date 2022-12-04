@@ -36,6 +36,9 @@ jobs:
       - name: Run prettier..
         run: npm run prettier-fix
 
+      - name: Run tests..
+        run: npm test
+
       # build project
       - name: Build..
         run: npm run build
