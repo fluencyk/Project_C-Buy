@@ -11,16 +11,24 @@ export function CartProvider({ children }) {
 
   const addItemToCart = item => {
     setCartItems(items => {
-      const ids = items.map(v => v.url);
-      return ids.includes(item.url) ? items : items.concat(item);
+      const ids = items.map(v => v.id);
+      return ids.includes(item.id) ? items : items.concat(item);
     });
   };
 
   const removeItemFromCart = item => {
-    setCartItems(items => items.filter(_item => _item.url !== item.url));
+    setCartItems(items => items.filter(_item => _item.id !== item.id));
   };
 
-  const value = { cartItems, setCartItems, addItemToCart, removeItemFromCart };
+  const clearCart = () => setCartItems([]);
+
+  const value = {
+    cartItems,
+    setCartItems,
+    addItemToCart,
+    removeItemFromCart,
+    clearCart,
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
