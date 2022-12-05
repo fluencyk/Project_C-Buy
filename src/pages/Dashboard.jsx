@@ -9,11 +9,10 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/photos')
-      .then(response => response.json())
-      .then(json => {
-        const data = json.slice(0, 20);
-        setItems(data);
+    fetch('https://dummyjson.com/products/category/groceries')
+      .then(res => res.json())
+      .then(data => {
+        setItems(data.products);
         setLoading(false);
       });
   }, []);
@@ -33,22 +32,24 @@ function Dashboard() {
     >
       {items.length ? (
         items.map(item => {
-          const alreadyInCart = cartItems.find(_item => _item.url === item.url);
+          const alreadyInCart = cartItems.find(_item => _item.id === item.id);
           return (
             <Card
               style={{ textAlign: 'center', borderRadius: 20 }}
-              key={item.url}
+              key={item.id}
               onClick={() => handleAddCartItem(item)}
               interactive
             >
               <img
                 loading="lazy"
-                width="100%"
+                width={200}
+                height={200}
                 style={{ objectFit: 'contain', borderRadius: 20 }}
                 alt={item.title}
-                src={item.url}
+                src={item.images[0]}
               />
               <h5>{item.title}</h5>
+              <p>{item.description}</p>
               <Button
                 intent="primary"
                 fill

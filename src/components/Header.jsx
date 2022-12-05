@@ -31,7 +31,8 @@ export function Header() {
       <React.Fragment>
         {cartItems.map(item => {
           return (
-            <div
+            <Card
+              key={item.id}
               style={{
                 display: 'flex',
                 placeContent: 'center space-between',
@@ -46,18 +47,17 @@ export function Header() {
                   marginRight: 10,
                   borderRadius: 20,
                 }}
-                src={item.url}
+                src={item.images[0]}
                 alt={item.title}
               />
               <strong>{item.title}</strong>
               <Button
                 minimal
-                intent="danger"
                 style={{ marginLeft: 10 }}
-                icon="delete"
+                icon="trash"
                 onClick={() => removeItemFromCart(item)}
               />
-            </div>
+            </Card>
           );
         })}
         <Button
