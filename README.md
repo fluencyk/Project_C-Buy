@@ -8,6 +8,7 @@ This Repo hosts the Front-end of C-Buy
 Deployed on Netlify: https://c-buy.netlify.app
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d5c2fb4c-c9f6-47f2-997d-67dc81ffa0c2/deploy-status)](https://app.netlify.com/sites/c-buy/deploys)
+[![c-buy](https://github.com/fluencyk/Project_C-Buy/actions/workflows/cbuy-ci.yml/badge.svg?branch=main)](https://github.com/fluencyk/Project_C-Buy/actions/workflows/cbuy-ci.yml)
 
 Back-end: <https://github.com/xander557/C-Buy_Backend>
 
