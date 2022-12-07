@@ -112,7 +112,7 @@ export function Checkout() {
               labelInfo="(required)"
               intent="primary"
             >
-              <InputGroup id="text-input" placeholder="Placeholder text" />
+              <InputGroup id="text-input" placeholder="Enter your address.." />
             </FormGroup>
 
             <FormGroup
@@ -122,7 +122,7 @@ export function Checkout() {
               intent="primary"
               labelInfo="(optional)"
             >
-              <InputGroup id="text-input" placeholder="Placeholder text" />
+              <InputGroup id="text-input" placeholder="Enter your address.." />
             </FormGroup>
 
             <FormGroup
@@ -142,7 +142,7 @@ export function Checkout() {
             <Button
               fill
               large
-              disabled={meta.error}
+              disabled={meta.error?.length}
               onClick={() => {
                 setPaymentSuccess(true);
               }}
@@ -159,7 +159,7 @@ export function Checkout() {
         onClose={() => setPaymentSuccess(false)}
         icon="credit-card"
       >
-        <div style={{ textAlign: 'center' }}>
+        <Card style={{ textAlign: 'center' }}>
           <Icon icon="tick-circle" intent="success" size={150} />
 
           <Text tagName="p">
@@ -175,7 +175,7 @@ export function Checkout() {
               clearCart();
             }}
           />
-        </div>
+        </Card>
       </Dialog>
     </div>
   );
